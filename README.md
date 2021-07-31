@@ -1,4 +1,4 @@
-# Bear Blog
+# Bearpress
 
 ![Screenshot of application](./assets/Screenshot.jpg)
 
@@ -14,11 +14,11 @@ A resource-friendly blogging app running on Express.js and MySQL.
 
 ## Installation
 
-The easiest way to install Bear Blog is to clone this repository using
+The easiest way to install Bearpress is to clone this repository using
 the following command.
 
 ```
-git@github.com:bear-evans/bear-blog.git
+git@github.com:bear-evans/bearpress.git
 ```
 
 Once downloaded, you can install its dependencies by navigating to the
@@ -63,7 +63,7 @@ A demonstration of the app's functionality can be found [here](HEROKU LINK HERE)
 
 ## Tests
 
-There are no tests for the Bear Blog application at this time.
+There are no tests for the Bearpress application at this time.
 
 ## License
 
