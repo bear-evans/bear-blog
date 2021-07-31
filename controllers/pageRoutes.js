@@ -1,14 +1,11 @@
 // =============================================
-//  Base Routes
+//  Page Routes
 // ---------------------------------------------
-// Splits static vs. dynamic routes
+// Handles serving of static resources via
+// handlebars templates
 // =============================================
 const router = require("express").Router();
 
-const apiRoutes = require("./api");
-const pageRoutes = require("./pageRoutes");
-
-router.use("/", pageRoutes);
-router.use("/api", apiRoutes);
+router.get("/", (req, res) => {});
 
 module.exports = router;

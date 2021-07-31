@@ -1,3 +1,10 @@
+// =============================================
+//  Bear Blog Server Core
+// ---------------------------------------------
+// Initializes primary components and starts
+// the server
+// =============================================
+
 // Initialize main modules
 const path = require("path");
 const express = require("express");

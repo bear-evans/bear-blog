@@ -1,14 +1,11 @@
 // =============================================
-//  Base Routes
+//  Blog Routes
 // ---------------------------------------------
-// Splits static vs. dynamic routes
+// API routes related to blog content, posting,
+// and commenting
 // =============================================
 const router = require("express").Router();
 
-const apiRoutes = require("./api");
-const pageRoutes = require("./pageRoutes");
-
-router.use("/", pageRoutes);
-router.use("/api", apiRoutes);
+router.get("/", (req, res) => {});
 
 module.exports = router;

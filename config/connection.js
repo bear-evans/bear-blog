@@ -1,3 +1,9 @@
+// =============================================
+//  Connection
+// ---------------------------------------------
+// Handles the MySQL database connection and
+// associated configuration
+// =============================================
 const Sequelize = require("sequelize");
 require("dotenv").config();
 
