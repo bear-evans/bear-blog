@@ -1,5 +1,5 @@
 // =============================================
-//  Bear Blog Server Core
+//  Bearpress Server Core
 // ---------------------------------------------
 // Initializes primary components and starts
 // the server
