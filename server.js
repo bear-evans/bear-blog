@@ -14,7 +14,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Initialize secondary utilities
 const routes = require("./controllers");
-const sequelize = require(".config/connection");
+const sequelize = require("./config/connection");
 const helpers = require("./utils/helpers");
 const { urlencoded } = require("express");
 
