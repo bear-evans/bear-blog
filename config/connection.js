@@ -9,6 +9,8 @@ require("dotenv").config();
 
 let sequelize;
 
+// Checks for a JAWSDB url, for deployment to Heroku
+// This overrides all other connection variables
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL, {});
 } else {
