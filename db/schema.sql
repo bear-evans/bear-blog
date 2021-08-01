@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS bearpress_db;
 
 CREATE DATABASE bearpress_db;
 
+USE bearpress_db;
+
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     display_name VARCHAR(50) NOT NULL,
