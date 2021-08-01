@@ -1,3 +1,7 @@
 body {
   background-color: aqua;
 }
+
+.login-form {
+  max-width: 500px;
+}
