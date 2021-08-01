@@ -9,7 +9,7 @@
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
-const exphbs = require("express-handlebars");
+const handlebars = require("express-handlebars");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Initialize secondary utilities
@@ -38,9 +38,17 @@ const sess = {
 app.use(session(sess));
 
 // Set up addons
-const hbs = exphbs.create({ helpers });
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.engine(
+  "hbs",
+  handlebars({
+    extname: ".hbs",
+    layoutsDir: __dirname + "/views/layouts",
+    partialsDir: __dirname + "/views/partials",
+    defaultLayout: "main",
+    helpers: helpers,
+  })
+);
+app.set("view engine", "hbs");
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
