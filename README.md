@@ -59,7 +59,7 @@ node server.js
 
 from the app's directory.
 
-A demonstration of the app's functionality can be found [here](HEROKU LINK HERE).
+A live demonstration of the app's functionality can be found [here](https://bearpress.herokuapp.com/).
 
 ## Tests
 
