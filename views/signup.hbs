@@ -4,41 +4,50 @@
     <p>Create an account to start sharing your thoughts on Bearpress.</p>
   </div>
   <div class="input-group input-group-sm d-flex flex-column w-50 mx-auto">
-    <label for="name-signup" class="form-label">Display Name</label>
-    <input
-      id="name-signup"
-      type="text"
-      class="form-control my-2 w-100"
-      placeholder="Name"
-      aria-label="name"
-    />
+    <div class="form-floating mb-3">
+      <input
+        id="name-signup"
+        type="text"
+        class="form-control w-100"
+        placeholder="Name"
+        aria-label="name"
+      />
+      <label for="name-signup" class="form-label">Display Name</label>
 
-    <label for="email-signup" class="form-label">Email</label>
-    <input
-      id="email-signup"
-      type="text"
-      class="form-control my-2 w-100"
-      placeholder="Email"
-      aria-label="email"
-    />
+    </div>
 
-    <label for="name-signup" class="form-label">Password</label>
-    <input
-      id="password-signup"
-      type="text"
-      class="form-control my-2 w-100"
-      placeholder="Password"
-      aria-label="password"
-    />
+    <div class="form-floating mb-3">
+      <input
+        id="email-signup"
+        type="email"
+        class="form-control w-100"
+        placeholder="Email"
+        aria-label="email"
+      />
+      <label for="email-signup" class="form-label">Email</label>
+    </div>
 
-    <label for="name-signup" class="form-label">Re-Enter Password</label>
-    <input
-      id="password-check-signup"
-      type="text"
-      class="form-control my-2 w-100"
-      placeholder="Re-enter Password"
-      aria-label="password check"
-    />
+    <div class="form-floating mb-3">
+      <input
+        id="password-signup"
+        type="password"
+        class="form-control w-100"
+        placeholder="Password"
+        aria-label="password"
+      />
+      <label for="password-signup" class="form-label">Password</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        id="password-check-signup"
+        type="password"
+        class="form-control w-100"
+        placeholder="Re-enter Password"
+        aria-label="password check"
+      />
+      <label for="password-check-signup" class="form-label">Re-Enter Password</label>
+    </div>
 
     <button
       id="signup-button"
