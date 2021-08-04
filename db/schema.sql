@@ -6,10 +6,9 @@ USE bearpress_db;
 
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    display_name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    pass_hash VARCHAR(60) NOT NULL,
-    salt VARCHAR(50) NOT NULL
+    password VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE posts (
