@@ -7,14 +7,23 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+function renderSignup(err) {
+  res.redirect("signup", { error: err });
+}
+
 // Creates a new user account using /api/users/signup
 router.post("/signup", async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userData = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
+      req.session.name = req.body.name;
 
       res.status(200).json(userData);
     });
@@ -30,31 +39,36 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // If the user's email doesn't match one in the database, reject
+    console.log("LOGGING IN");
     const userData = await User.findOne({ where: { email: req.body.email } });
+
     if (!userData) {
-      res.status(400).json({ message: "Incorrect email or password" });
+      renderSignup("Incorrect email or password");
+      return;
     }
 
     // If the user's password doesn't match the one in the database, reject
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
-      res.status(400).json({ message: "Incorrect email or password" });
+      renderSignup("Incorrect email or password");
+      return;
     }
 
     // Store the session and log the user in
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
-
-      res.json({ user: userData.name, message: "You are now logged in!" });
+      req.session.name = userData.name;
     });
+
+    res.json({ user: userData.name, message: "You are now logged in!" });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 // Logs out a currently logged in user using /api/users/logout
-router.post("/logout", async (req, res) => {
+router.get("/logout", async (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204);

@@ -21,21 +21,22 @@ const { urlencoded } = require("express");
 // Set up server
 const app = express();
 const PORT = process.env.PORT || 3001;
+const bearStore = new SequelizeStore({ db: sequelize });
+
 const sess = {
+  name: "Name",
+  loggedIn: false,
   secret: process.env.SECRET,
-  cookie: {
-    maxAge: 3600,
-    httpOnly: false,
-    secure: false,
-    sameSite: "strict",
-  },
+  cookie: {},
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({ db: sequelize }),
+  store: bearStore,
 };
 
 // Link it
 app.use(session(sess));
+
+bearStore.sync();
 
 // Set up addons
 app.engine(

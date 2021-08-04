@@ -1,36 +1,12 @@
 // ===================================
-// Signup Form module
-// ===================================
-const signup = (function () {
-  // grabs data from the form inputs and assembles them into
-  // a data object
-  function getData() {
-    let nameRaw = $("#name-signup").val();
-    let emailRaw = $("#email-signup").val();
-    let passRaw = $("#password-signup").val();
-    let checkRaw = $("#password-check-signup").val();
-
-    // User data object
-    // TODO: Add validation so we're not using the raw input
-    let data = {
-      name: nameRaw,
-      email: emailRaw,
-      password: passRaw,
-    };
-
-    return data;
-  }
-})();
-
-// ===================================
 // Login/Logout module
 // ===================================
 const login = (function () {
   // grabs data from the form inputs and assembles them into
   // a data object
   function getData() {
-    let emailRaw = $("#email-login").val();
-    let passRaw = $("#password-login").val();
+    let emailRaw = $("#email-login").val().trim();
+    let passRaw = $("#password-login").val().trim();
 
     // TODO: validate this in some way so we're not grabbing
     // raw user input
@@ -42,18 +18,39 @@ const login = (function () {
     return data;
   }
 
-  function submit() {
+  async function submit(event) {
+    event.preventDefault();
     let userData = getData();
+
+    console.log("Submit Clicked!" + userData.email + userData.password);
 
     const response = await fetch("/api/users/login", {
       method: "POST",
-      body: JSON.stringify({ userData }),
+      body: JSON.stringify({
+        email: userData.email,
+        password: userData.password,
+      }),
       headers: { "Content-Type": "application/json" },
     });
+
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
+      // TODO: Add some more elegant error handling here
+    }
   }
+
+  function init() {
+    console.log("script loaded!");
+    $("#login-button").on("click", submit);
+  }
+
+  return {
+    init: init,
+  };
 })();
 
-// ===================================
-// Main Module
-// ===================================
-const main = (function () {})();
+// Trigger when document is ready
+$(function () {
+  login.init();
+});

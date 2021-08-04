@@ -1,13 +1,13 @@
 {{#if loggedIn}}
   <div id="greeting">Hello,
     {{name}}!
-    <div id="logout-button"><a href="/api/user/logout">Logout</a></div>
+    <div id="logout-button"><a href="/api/users/logout">Logout</a></div>
   </div>
 {{else}}
   <div id="header-login" class="input-group input-group-sm login-form">
     <input
       id="email-login"
-      type="text"
+      type="email"
       class="form-control me-2"
       placeholder="Email"
       aria-label="Email"
@@ -15,7 +15,7 @@
 
     <input
       id="password-login"
-      type="text"
+      type="password"
       class="form-control mx-2"
       placeholder="Password"
       aria-label="password"
@@ -25,5 +25,11 @@
       type="submit"
       class="btn btn-primary ms-2"
     >Login</button>
+    <a href="/signup">
+      <button
+        id="create-account-button"
+        type="submit"
+        class="btn btn-secondary ms-2"
+      >Signup</button></a>
   </div>
 {{/if}}
