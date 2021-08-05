@@ -13,11 +13,16 @@ router.get('/', async (req, res) => {
     include: [{ model: User, attributes: ['name'] }],
   });
 
-  console.log('Post Data = ' + postData);
-  const posts = postData.map((post) => post.get({ plain: true }));
+  let posts = postData.map((post) => post.get({ plain: true }));
+  console.log(posts);
+
+  // Trims the post prevuew if it's over 150 characters
+  posts.forEach((post, i, arr) => {
+    post.content = post.content.substring(0, 150);
+  });
 
   res.render('home', {
-    posts,
+    posts: posts,
     name: req.session.name,
     loggedIn: req.session.loggedIn,
   });
@@ -78,7 +83,7 @@ router.get('/blogs/:id', async (req, res) => {
   try {
     // const postData = await Post.findOne({ where: { id: req.params.id } });
     const postData = await Post.findByPk(req.params.id, {
-      include: [{ model: User, attributes: ['name'] }],
+      include: [{ model: User, attributes: ['name'] }, { model: Comment }],
     });
 
     const post = postData.get({ plain: true });
