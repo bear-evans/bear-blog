@@ -38,25 +38,7 @@ const signup = (function () {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      // TODO: Add some more elegant error handling here
-    }
-  }
-
-  async function logout() {
-    const response = await fetch("/api/users/logout", {
-      method: "POST",
-      body: JSON.stringify({
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.ok) {
-      document.location.replace("/");
-    } else {
-      // TODO: Add some more elegant error handling here
+      document.location.replace("/signup?error=DBErr");
     }
   }
 

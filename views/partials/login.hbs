@@ -1,7 +1,12 @@
+<script src="/js/login.js"></script>
 {{#if loggedIn}}
   <div id="greeting">Hello,
     {{name}}!
-    <div id="logout-button"><a href="/api/users/logout">Logout</a></div>
+    <button
+      type="submit"
+      id="logout-button"
+      class="btn btn-secondary ms-2"
+    >Logout</button>
   </div>
 {{else}}
   <div id="header-login" class="input-group input-group-sm login-form">

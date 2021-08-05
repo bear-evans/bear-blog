@@ -1,7 +1,16 @@
 <script src="/js/signup.js"></script>
 <div class="container mt-5">
+<<<<<<< Updated upstream
   <div id="error-box" class="alert alert-danger hidden" role="alert">
   </div>
+=======
+  {{#if error}}
+    <div class="alert alert-danger" role="alert">
+      <p>Error: {{error}}</p>
+      <p>If you don't have an account, you can create one.</p>
+    </div>
+  {{/if}}
+>>>>>>> Stashed changes
   <div class="mx-auto text-center mb-5">
     <h1>Create Account</h1>
     <p>Create an account to start sharing your thoughts on Bearpress.</p>

@@ -7,10 +7,13 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
+<<<<<<< Updated upstream
 function renderSignup(err) {
   res.redirect("/get", { error: err });
 }
 
+=======
+>>>>>>> Stashed changes
 // Creates a new user account using /api/users/signup
 router.post("/signup", async (req, res) => {
   try {
@@ -39,22 +42,28 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // If the user's email doesn't match one in the database, reject
-    console.log("LOGGING IN");
     const userData = await User.findOne({ where: { email: req.body.email } });
-
     if (!userData) {
+<<<<<<< Updated upstream
       res
         .status(400)
         .json({ message: "Unknown username/password combination." });
+=======
+      res.status(404).json({ message: "No user found for those credentials." });
+>>>>>>> Stashed changes
       return;
     }
 
     // If the user's password doesn't match the one in the database, reject
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
+<<<<<<< Updated upstream
       res
         .status(400)
         .json({ message: "Unknown username/password combination." });
+=======
+      res.status(404).json({ message: "No user found for those credentials." });
+>>>>>>> Stashed changes
       return;
     }
 
@@ -63,22 +72,26 @@ router.post("/login", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
       req.session.name = userData.name;
-    });
 
-    res.json({ user: userData.name, message: "You are now logged in!" });
+      res
+        .status(200)
+        .json({ user: userData.name, message: "You are now logged in!" });
+    });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 // Logs out a currently logged in user using /api/users/logout
-router.get("/logout", async (req, res) => {
+router.post("/logout", async (req, res) => {
   if (req.session.loggedIn) {
+    console.log("User is logged in");
     req.session.destroy(() => {
-      res.status(204);
-      res.render("home");
+      console.log("Sending 204");
+      res.status(204).end();
     });
   } else {
+    console.log("Sending 404");
     res.status(404).end();
   }
 });

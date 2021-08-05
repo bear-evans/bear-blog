@@ -22,7 +22,7 @@ router.get("/about", (req, res) => {
   });
 });
 
-// Gets about page
+// Gets new post page, redirecting to signup if not logged in
 router.get("/create", (req, res) => {
   if (req.session.loggedIn) {
     res.render("create", {
@@ -36,24 +36,24 @@ router.get("/create", (req, res) => {
 
 router.get("/signup", (req, res) => {
   // If user is already logged in, redirect to the homepage instead
-  if (req.session.loggedIn) {
-    res.render("home", {
-      name: req.session.name,
-      loggedIn: req.session.loggedIn,
-    });
-  } else {
-    res.render("signup");
-  }
-});
-
-router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.render("home", {
-      name: req.session.name,
-      loggedIn: req.session.loggedIn,
-    });
-  } else {
-    res.render("login");
+  switch (req.query.error) {
+    case "BadLogin":
+      res.render("signup", { error: "No user found with those credentials." });
+      break;
+    case "DBErr":
+      res.render("signup", {
+        error: "There was a problem connecting to the database.",
+      });
+      break;
+    default:
+      if (req.session.loggedIn) {
+        res.render("home", {
+          name: req.session.name,
+          loggedIn: req.session.loggedIn,
+        });
+      } else {
+        res.render("signup");
+      }
   }
 });
 
