@@ -15,6 +15,8 @@ CREATE TABLE posts (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     author_id INTEGER NOT NULL REFERENCES users(id),
     title VARCHAR(255) NOT NULL,
+    createdAt DATE NOT NULL,
+    updatedAt DATE NOT NULL,
     content TEXT NOT NULL
 );
 
@@ -24,4 +26,6 @@ CREATE TABLE comments (
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     on_post INTEGER NOT NULL REFERENCES posts(id)
+    createdAt DATE NOT NULL,
+    updatedAt DATE NOT NULL,
 );

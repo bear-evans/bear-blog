@@ -6,11 +6,19 @@ body {
   max-width: 500px;
 }
 
-<<<<<<< Updated upstream
 .hidden {
   display: none;
-=======
+}
+
 #post-text {
   height: 20em;
->>>>>>> Stashed changes
+}
+
+.post-preview {
+  padding: 1em;
+  width: 20%;
+}
+
+.post-preview a {
+  text-decoration: none;
 }

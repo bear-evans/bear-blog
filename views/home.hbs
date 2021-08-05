@@ -1,3 +1,16 @@
-<h1>It works (ish) !</h1>
+<div class='container mt-5'>
+  <p>Welcome to Bearpress! Check out what others have to say, or create an
+    account to share your own thoughts!</p>
 
-<p>Another test!</p>
+  <h2>Recent Posts</h2>
+  <div class='container d-flex'>
+    {{#each posts}}
+      <div class='post-preview mt-2 ms-2 bg-light has-text-black'>
+        <a href='/blogs/{{this.id}}' class='text-dark'>
+          <h3>{{this.title}}</h3>
+          <p>{{this.content}}</p>
+        </a>
+      </div>
+    {{/each}}
+  </div>
+</div>

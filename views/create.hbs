@@ -1,6 +1,12 @@
+<script src="./js/post.js"></script>
 <div class="container mt-5">
   <h1>Create Post</h1>
-  <p>This is some filler to show you're on the right page!</p>
+  {{#if error}}
+    <div class="alert alert-danger hidden" role="alert">
+      <p>Error: {{error}}</p>
+    </div>
+  {{/if}}
+  <p>Share your thoughts on Bearpress!</p>
   <div class="mb-3">
     <label for="post-title" class="form-label">Title</label>
     <input

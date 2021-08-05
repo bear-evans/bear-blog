@@ -48,11 +48,7 @@ const login = (function () {
     if (response.ok) {
       document.location.replace("/");
     } else {
-<<<<<<< Updated upstream:public/js/script.js
-      document.location.replace("/signup?error=1");
-=======
       document.location.replace("/signup?error=BadLogin");
->>>>>>> Stashed changes:public/js/login.js
     }
   }
 
