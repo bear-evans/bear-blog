@@ -8,7 +8,7 @@ const router = require("express").Router();
 const { User } = require("../../models");
 
 function renderSignup(err) {
-  res.redirect("signup", { error: err });
+  res.redirect("/get", { error: err });
 }
 
 // Creates a new user account using /api/users/signup
@@ -43,14 +43,18 @@ router.post("/login", async (req, res) => {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
-      renderSignup("Incorrect email or password");
+      res
+        .status(400)
+        .json({ message: "Unknown username/password combination." });
       return;
     }
 
     // If the user's password doesn't match the one in the database, reject
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
-      renderSignup("Incorrect email or password");
+      res
+        .status(400)
+        .json({ message: "Unknown username/password combination." });
       return;
     }
 

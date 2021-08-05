@@ -63,6 +63,17 @@ const signup = (function () {
   function init() {
     $("#signup-button").on("click", submit);
     $("#create-account-button").on("click", logout);
+
+    const urlParams = window.location.search;
+    const params = new URLSearchParams(urlParams);
+    console.log(params);
+
+    if (params.has("error")) {
+      $("#error-box").toggleClass("hidden");
+      $("#error-box").html(
+        "No user found with those credentials. Would you like to sign up?"
+      );
+    }
   }
 
   return {

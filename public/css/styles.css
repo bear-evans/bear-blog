@@ -5,3 +5,7 @@ body {
 .login-form {
   max-width: 500px;
 }
+
+.hidden {
+  display: none;
+}

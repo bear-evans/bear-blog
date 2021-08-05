@@ -1,11 +1,7 @@
 <script src="/js/signup.js"></script>
 <div class="container mt-5">
-  {{#if error}}
-    <div class="alert alert-danger" role="alert">
-      Error:
-      {{error}}. If you don't have an account, you can create one.
-    </div>
-  {{/if}}
+  <div id="error-box" class="alert alert-danger hidden" role="alert">
+  </div>
   <div class="mx-auto text-center mb-5">
     <h1>Create Account</h1>
     <p>Create an account to start sharing your thoughts on Bearpress.</p>

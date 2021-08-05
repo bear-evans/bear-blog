@@ -22,8 +22,6 @@ const login = (function () {
     event.preventDefault();
     let userData = getData();
 
-    console.log("Submit Clicked!" + userData.email + userData.password);
-
     const response = await fetch("/api/users/login", {
       method: "POST",
       body: JSON.stringify({
@@ -36,7 +34,7 @@ const login = (function () {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      // TODO: Add some more elegant error handling here
+      document.location.replace("/signup?error=1");
     }
   }
 
