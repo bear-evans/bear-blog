@@ -7,13 +7,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-<<<<<<< Updated upstream
-function renderSignup(err) {
-  res.redirect("/get", { error: err });
-}
-
-=======
->>>>>>> Stashed changes
 // Creates a new user account using /api/users/signup
 router.post("/signup", async (req, res) => {
   try {
@@ -44,26 +37,14 @@ router.post("/login", async (req, res) => {
     // If the user's email doesn't match one in the database, reject
     const userData = await User.findOne({ where: { email: req.body.email } });
     if (!userData) {
-<<<<<<< Updated upstream
-      res
-        .status(400)
-        .json({ message: "Unknown username/password combination." });
-=======
       res.status(404).json({ message: "No user found for those credentials." });
->>>>>>> Stashed changes
       return;
     }
 
     // If the user's password doesn't match the one in the database, reject
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
-<<<<<<< Updated upstream
-      res
-        .status(400)
-        .json({ message: "Unknown username/password combination." });
-=======
       res.status(404).json({ message: "No user found for those credentials." });
->>>>>>> Stashed changes
       return;
     }
 
