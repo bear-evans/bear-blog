@@ -6,6 +6,7 @@
 // =============================================
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
+const authBlock = require('../utils/auth');
 
 // Gets homepage
 router.get('/', async (req, res) => {
@@ -35,31 +36,32 @@ router.get('/about', (req, res) => {
 });
 
 // Gets new post page, redirecting to signup if not logged in
-router.get('/create', (req, res) => {
+router.get('/create', authBlock, (req, res) => {
   if (req.query.error) {
     res.render('create', {
       name: req.session.name,
       loggedIn: req.session.loggedIn,
       error: 'Error submiting post to database.',
     });
-  }
-  if (req.session.loggedIn) {
+  } else {
     res.render('create', {
       name: req.session.name,
       loggedIn: req.session.loggedIn,
     });
-  } else {
-    res.render('signup', { error: 'You must log in first!' });
   }
 });
 
+// Gets the signup page. Grabs the error URL query to customize an error message
 router.get('/signup', (req, res) => {
   // If user is already logged in, redirect to the homepage instead
   switch (req.query.error) {
+    case 'noLogin':
+      res.render('signup', { error: 'You must log in first!' });
+      break;
     case 'BadLogin':
       res.render('signup', { error: 'No user found with those credentials.' });
       break;
-    case 'DBErr':
+    case 'DBError':
       res.render('signup', {
         error: 'There was a problem connecting to the database.',
       });
@@ -93,11 +95,8 @@ router.get('/blogs/:id', async (req, res) => {
       ],
     });
 
-    console.log(postData);
-
     const post = postData.get({ plain: true });
 
-    console.log(post);
     res.render('post', {
       post,
       loggedIn: req.session.loggedIn,
@@ -106,6 +105,25 @@ router.get('/blogs/:id', async (req, res) => {
   } catch (err) {
     res.status(404).json({ message: 'No post found with that ID.' });
   }
+});
+
+// Gets the dashboard and grabs a list of previous posts by the same author
+router.get('/dashboard', authBlock, async (req, res) => {
+  const rawPosts = await Post.findAll({
+    where: { author_id: req.session.user_id },
+  });
+
+  // check to may sure rawPosts returned anything before doing something with it
+  let posts;
+  if (rawPosts) {
+    posts = rawPosts.map((post) => post.get({ plain: true }));
+  }
+
+  res.render('dashboard', {
+    posts,
+    name: req.session.name,
+    loggedIn: req.session.loggedIn,
+  });
 });
 
 module.exports = router;

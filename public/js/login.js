@@ -5,8 +5,8 @@ const login = (function () {
   // grabs data from the form inputs and assembles them into
   // a data object
   function getData() {
-    let emailRaw = $("#email-login").val().trim();
-    let passRaw = $("#password-login").val().trim();
+    let emailRaw = $('#email-login').val().trim();
+    let passRaw = $('#password-login').val().trim();
 
     // TODO: validate this in some way so we're not grabbing
     // raw user input
@@ -18,15 +18,16 @@ const login = (function () {
     return data;
   }
 
+  // Handles logout function
   async function logout() {
     event.preventDefault();
-    const response = await fetch("/api/users/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const response = await fetch('/api/users/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace('/');
     }
   }
 
@@ -36,26 +37,26 @@ const login = (function () {
     event.preventDefault();
     let userData = getData();
 
-    const response = await fetch("/api/users/login", {
-      method: "POST",
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
       body: JSON.stringify({
         email: userData.email,
         password: userData.password,
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace('/');
     } else {
-      document.location.replace("/signup?error=BadLogin");
+      document.location.replace('/signup?error=BadLogin');
     }
   }
 
   // Sets up event listeners
   function init() {
-    $("#login-button").on("click", submit);
-    $("#logout-button").on("click", logout);
+    $('#login-button').on('click', submit);
+    $('#logout-button').on('click', logout);
   }
 
   return {

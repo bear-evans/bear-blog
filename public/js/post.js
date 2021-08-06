@@ -2,6 +2,7 @@
 // Blog and Comment Posting Module
 // ===================================
 const blog = (function () {
+  // grabs data from the DOM objects
   function getData() {
     let title = $('#post-title').val().trim();
     let content = $('#post-text').val().trim();
@@ -12,6 +13,7 @@ const blog = (function () {
     };
   }
 
+  // Post submission via form
   async function submit() {
     event.preventDefault();
     let data = getData();
@@ -35,6 +37,7 @@ const blog = (function () {
     }
   }
 
+  // Comment submission to server
   async function addComment() {
     event.preventDefault();
     let postTo = $('#add-comment-button').data('postto');

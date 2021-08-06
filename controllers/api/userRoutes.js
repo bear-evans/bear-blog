@@ -4,11 +4,11 @@
 // Handles user-related requests such as logins,
 // logouts, and settings
 // =============================================
-const router = require("express").Router();
-const { User } = require("../../models");
+const router = require('express').Router();
+const { User } = require('../../models');
 
 // Creates a new user account using /api/users/signup
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const userData = await User.create({
       name: req.body.name,
@@ -27,24 +27,24 @@ router.post("/signup", async (req, res) => {
     console.log(err);
     res
       .status(500)
-      .json({ message: "There was a problem accessing the database." });
+      .json({ message: 'There was a problem accessing the database.' });
   }
 });
 
 // Logs in a previously created user using /api/users/login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     // If the user's email doesn't match one in the database, reject
     const userData = await User.findOne({ where: { email: req.body.email } });
     if (!userData) {
-      res.status(404).json({ message: "No user found for those credentials." });
+      res.status(404).json({ message: 'No user found for those credentials.' });
       return;
     }
 
     // If the user's password doesn't match the one in the database, reject
     const validPassword = await userData.checkPassword(req.body.password);
     if (!validPassword) {
-      res.status(404).json({ message: "No user found for those credentials." });
+      res.status(404).json({ message: 'No user found for those credentials.' });
       return;
     }
 
@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
 
       res
         .status(200)
-        .json({ user: userData.name, message: "You are now logged in!" });
+        .json({ user: userData.name, message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json(err);
@@ -64,15 +64,12 @@ router.post("/login", async (req, res) => {
 });
 
 // Logs out a currently logged in user using /api/users/logout
-router.post("/logout", async (req, res) => {
+router.post('/logout', async (req, res) => {
   if (req.session.loggedIn) {
-    console.log("User is logged in");
     req.session.destroy(() => {
-      console.log("Sending 204");
       res.status(204).end();
     });
   } else {
-    console.log("Sending 404");
     res.status(404).end();
   }
 });

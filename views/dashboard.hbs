@@ -1,0 +1,43 @@
+<script src='./js/dash.js'></script>
+<div class='container mt-5'>
+  <div id='dash-header'>
+    <h1>My Dashboard</h1>
+    <p>
+      Welcome to your dashboard,
+      {{name}}! Here you can view, update, or delete your previous posts, as
+      well as create a new one!
+    </p>
+  </div>
+  <a href='/create'><button type='button' class='btn btn-primary'>Create New
+      Post</button></a>
+  <div id='dash-recent' class='mt-5'>
+    <h2>Recent Posts</h2>
+    {{#if posts}}
+      {{#each posts}}
+        <div
+          class='post-list-item d-md-inline-flex flex-row justify-content-between p-3 w-100 bg-dark mt-3'
+        >
+          <a href='/blogs/{{this.id}}'>
+            <p class='h4 text-light'>{{this.title}}</p>
+          </a>
+          <div class='dash-buttons-container'>
+            <button
+              class='dash-edit-button btn btn-primary'
+              data-post='{{this.id}}'
+            >
+              Edit Post
+            </button>
+            <button
+              class='dash-delete-button btn btn-danger ms-auto'
+              data-post='{{this.id}}'
+            >
+              Delete Post
+            </button>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <p>There are no recent posts to display.</p>
+    {{/if}}
+  </div>
+</div>

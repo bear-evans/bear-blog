@@ -15,16 +15,18 @@
     <div id='comment-header'>
       <h2>Comments</h2>
     </div>
-    <div id='comment-post'>
-      <textarea id='add-comment-body' class='form-control'></textarea>
-      <div id='comment-button-container' class='me-auto'>
-        <button
-          id='add-comment-button'
-          class='btn btn-primary mt-2'
-          data-postto='{{post.id}}'
-        >Submit Comment</button>
+    {{#if loggedIn}}
+      <div id='comment-post'>
+        <textarea id='add-comment-body' class='form-control'></textarea>
+        <div id='comment-button-container' class='me-auto'>
+          <button
+            id='add-comment-button'
+            class='btn btn-primary mt-2'
+            data-postto='{{post.id}}'
+          >Submit Comment</button>
+        </div>
       </div>
-    </div>
+    {{/if}}
     <div id='comment-body'>
       {{#each post.Comments}}
         <hr />
