@@ -8,8 +8,21 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const authBlock = require('../../utils/auth');
 
-router.get('/', (req, res) => {});
+// ------------------------------------------------------------------------------------------------
+// grabs the raw JSON of a post, for the edit page
+router.get('/:id', async (req, res) => {
+  try {
+    const postData = await Post.findOne({ where: { id: req.params.id } });
 
+    const post = postData.get({ plain: true });
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(404).json(err);
+  }
+});
+// ------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------
 // Creates a new post using /api/blogs
 router.post('/', authBlock, async (req, res) => {
   try {
@@ -26,7 +39,9 @@ router.post('/', authBlock, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Creates a new comment
 router.post('/comment', authBlock, async (req, res) => {
   try {
@@ -43,7 +58,9 @@ router.post('/comment', authBlock, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Updates an existing blog post
 router.put('/:id', authBlock, async (req, res) => {
   try {
@@ -62,7 +79,9 @@ router.put('/:id', authBlock, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Deletes an existing blog post
 //FIXME: Technically anyone logged in can delete any post, not just the owner.
 // In a real production project this would need to be fixed.
@@ -80,5 +99,6 @@ router.delete('/:id', authBlock, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// ------------------------------------------------------------------------------------------------
 
 module.exports = router;

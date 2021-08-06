@@ -7,6 +7,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// ------------------------------------------------------------------------------------------------
 // Creates a new user account using /api/users/signup
 router.post('/signup', async (req, res) => {
   try {
@@ -30,7 +31,9 @@ router.post('/signup', async (req, res) => {
       .json({ message: 'There was a problem accessing the database.' });
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Logs in a previously created user using /api/users/login
 router.post('/login', async (req, res) => {
   try {
@@ -62,7 +65,9 @@ router.post('/login', async (req, res) => {
     res.status(400).json(err);
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Logs out a currently logged in user using /api/users/logout
 router.post('/logout', async (req, res) => {
   if (req.session.loggedIn) {
@@ -73,5 +78,6 @@ router.post('/logout', async (req, res) => {
     res.status(404).end();
   }
 });
+// ------------------------------------------------------------------------------------------------
 
 module.exports = router;

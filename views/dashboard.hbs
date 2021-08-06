@@ -21,12 +21,13 @@
             <p class='h4 text-light'>{{this.title}}</p>
           </a>
           <div class='dash-buttons-container'>
-            <button
-              class='dash-edit-button btn btn-primary'
-              data-post='{{this.id}}'
-            >
-              Edit Post
-            </button>
+            <a href='/edit?post={{this.id}}'>
+              <button
+                class='dash-edit-button btn btn-primary'
+                data-post='{{this.id}}'
+              >
+                Edit Post
+              </button></a>
             <button
               class='dash-delete-button btn btn-danger ms-auto'
               data-post='{{this.id}}'

@@ -8,6 +8,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 const authBlock = require('../utils/auth');
 
+// ------------------------------------------------------------------------------------------------
 // Gets homepage
 router.get('/', async (req, res) => {
   const postData = await Post.findAll({
@@ -26,7 +27,9 @@ router.get('/', async (req, res) => {
     loggedIn: req.session.loggedIn,
   });
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Gets about page
 router.get('/about', (req, res) => {
   res.render('about', {
@@ -34,7 +37,9 @@ router.get('/about', (req, res) => {
     loggedIn: req.session.loggedIn,
   });
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Gets new post page, redirecting to signup if not logged in
 router.get('/create', authBlock, (req, res) => {
   if (req.query.error) {
@@ -50,7 +55,9 @@ router.get('/create', authBlock, (req, res) => {
     });
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Gets the signup page. Grabs the error URL query to customize an error message
 router.get('/signup', (req, res) => {
   // If user is already logged in, redirect to the homepage instead
@@ -77,7 +84,9 @@ router.get('/signup', (req, res) => {
       }
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Gets a single post view
 router.get('/blogs/:id', async (req, res) => {
   try {
@@ -106,7 +115,9 @@ router.get('/blogs/:id', async (req, res) => {
     res.status(404).json({ message: 'No post found with that ID.' });
   }
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
 // Gets the dashboard and grabs a list of previous posts by the same author
 router.get('/dashboard', authBlock, async (req, res) => {
   const rawPosts = await Post.findAll({
@@ -125,5 +136,17 @@ router.get('/dashboard', authBlock, async (req, res) => {
     loggedIn: req.session.loggedIn,
   });
 });
+// ------------------------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------------------------
+// Grabs the post editor. Population of the fields is done client side using URL parameters
+router.get('/edit', authBlock, async (req, res) => {
+  res.render('edit', {
+    name: req.session.name,
+    loggedIn: req.session.loggedIn,
+  });
+});
+// ------------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------------
 module.exports = router;
