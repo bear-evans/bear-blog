@@ -5,7 +5,27 @@
 // Dashboard Confessional.
 // ======================================
 const dash = (function () {
-  function init() {}
+  // Deletes a single blog post
+  async function delPost(event) {
+    event.preventDefault();
+
+    let postId = $(this).data('post');
+    let apiURL = `/api/blogs/${postId}`;
+
+    const response = await fetch(apiURL, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    }
+  }
+
+  // Initializes event listeners
+  function init() {
+    $('.dash-delete-button').on('click', delPost);
+  }
 
   return {
     init: init,

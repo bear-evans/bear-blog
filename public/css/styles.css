@@ -17,3 +17,7 @@ body {
 .post-preview a {
   text-decoration: none;
 }
+
+.post-list-item a {
+  text-decoration: none;
+}
