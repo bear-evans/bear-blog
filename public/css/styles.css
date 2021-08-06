@@ -14,11 +14,6 @@ body {
   height: 20em;
 }
 
-.post-preview {
-  padding: 1em;
-  width: 20%;
-}
-
 .post-preview a {
   text-decoration: none;
 }
