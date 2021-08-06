@@ -38,7 +38,7 @@ const signup = (function () {
     }
 
     // User data object
-    // TODO: Add validation so we're not using the raw input
+    // FIXME: In production this would need to be sanitized
     let data = {
       name: nameRaw,
       email: emailRaw,
@@ -125,6 +125,7 @@ const signup = (function () {
     }
   }
 
+  // sets up event handlers and shows the error box if there is one
   function init() {
     $('#signup-button').on('click', submit);
 

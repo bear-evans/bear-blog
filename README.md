@@ -30,21 +30,13 @@ npm install
 
 This will install `express`, `mysql2`, `sequelize`, `bcrypt`, `connect-session-sequelize`, `express-handlebars`, `express-session`, and `dotenv`.
 
-A database schema and a seed file are included for convenience. To load the
+A database schema is included for convenience. To load the
 schema, initialize mysql from the command line in the application's directory
 and run
 
 ```
 mysql> source db/schema.sql;
 ```
-
-To seed the database, use the command
-
-```
-npm run seed
-```
-
-from the application's root directory.
 
 Additionally, you will need to add a .env file specifying your username,
 password, and host for the MySQL connection. A template has been provided.

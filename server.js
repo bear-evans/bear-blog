@@ -6,16 +6,16 @@
 // =============================================
 
 // Initialize main modules
-const path = require("path");
-const express = require("express");
-const session = require("express-session");
-const handlebars = require("express-handlebars");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const path = require('path');
+const express = require('express');
+const session = require('express-session');
+const handlebars = require('express-handlebars');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Initialize secondary utilities
-const routes = require("./controllers");
-const sequelize = require("./config/connection");
-const helpers = require("./utils/helpers");
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const helpers = require('./utils/helpers');
 
 // Set up server
 const app = express();
@@ -24,7 +24,9 @@ const bearStore = new SequelizeStore({ db: sequelize });
 
 const sess = {
   secret: process.env.SECRET,
-  cookie: {},
+  cookie: {
+    maxAge: 1200,
+  },
   resave: false,
   saveUninitialized: false,
   store: bearStore,
@@ -37,19 +39,19 @@ bearStore.sync();
 
 // Set up addons
 app.engine(
-  "hbs",
+  'hbs',
   handlebars({
-    extname: ".hbs",
-    layoutsDir: __dirname + "/views/layouts",
-    partialsDir: __dirname + "/views/partials",
-    defaultLayout: "main",
+    extname: '.hbs',
+    layoutsDir: __dirname + '/views/layouts',
+    partialsDir: __dirname + '/views/partials',
+    defaultLayout: 'main',
     helpers: helpers,
   })
 );
-app.set("view engine", "hbs");
+app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
