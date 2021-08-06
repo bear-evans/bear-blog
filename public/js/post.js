@@ -13,11 +13,12 @@ const blog = (function () {
   }
 
   async function submit() {
-    console.log('Post submit clicked');
-
     event.preventDefault();
+    let data = getData();
+    if (!data.title || !data.content) {
+      return;
+    }
 
-    data = getData();
     const response = await fetch('/api/blogs', {
       method: 'POST',
       body: JSON.stringify({
@@ -33,9 +34,32 @@ const blog = (function () {
       document.location.replace('/create?Err=DBErr');
     }
   }
+
+  async function addComment() {
+    event.preventDefault();
+    let postTo = $('#add-comment-button').data('postto');
+    let commentText = $('#add-comment-body').val().trim();
+    if (!commentText) {
+      return;
+    }
+
+    const response = await fetch('/api/blogs/comment', {
+      method: 'POST',
+      body: JSON.stringify({
+        content: commentText,
+        on_post: postTo,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.reload();
+    }
+  }
   // Initializes event listeners
   function init() {
     $('#post-button').on('click', submit);
+    $('#add-comment-button').on('click', addComment);
   }
 
   return {

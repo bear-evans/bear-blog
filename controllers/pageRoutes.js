@@ -5,7 +5,7 @@
 // handlebars templates
 // =============================================
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 
 // Gets homepage
 router.get('/', async (req, res) => {
@@ -13,10 +13,8 @@ router.get('/', async (req, res) => {
     include: [{ model: User, attributes: ['name'] }],
   });
 
+  // Converts the post to plain json and trims the post prevuew if it's over 150 characters
   let posts = postData.map((post) => post.get({ plain: true }));
-  console.log(posts);
-
-  // Trims the post prevuew if it's over 150 characters
   posts.forEach((post, i, arr) => {
     post.content = post.content.substring(0, 150);
   });
@@ -82,11 +80,23 @@ router.get('/signup', (req, res) => {
 router.get('/blogs/:id', async (req, res) => {
   try {
     // const postData = await Post.findOne({ where: { id: req.params.id } });
-    const postData = await Post.findByPk(req.params.id, {
-      include: [{ model: User, attributes: ['name'] }, { model: Comment }],
+    const postData = await Post.findOne({
+      where: { id: req.params.id },
+      include: [
+        { model: User, attributes: ['name'] },
+        {
+          model: Comment,
+          attributes: ['content', 'author_id', 'createdAt'],
+          required: false,
+          include: [{ model: User, attributes: ['name'] }],
+        },
+      ],
     });
 
+    console.log(postData);
+
     const post = postData.get({ plain: true });
+
     console.log(post);
     res.render('post', {
       post,

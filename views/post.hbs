@@ -1,7 +1,8 @@
+<script src='../js/post.js'></script>
 <div class='container mt-5'>
   <div id='view-header'>
     <h1>{{post.title}}</h1>
-    <p class='text-muted'>Created on
+    <p class='text-muted'>Created at
       {{post.createdAt}}
       by
       {{post.User.name}}</p>
@@ -17,12 +18,26 @@
     <div id='comment-post'>
       <textarea id='add-comment-body' class='form-control'></textarea>
       <div id='comment-button-container' class='me-auto'>
-        <button id='add-comment-button' class='btn btn-primary mt-2'>Submit
-          Comment</button>
+        <button
+          id='add-comment-button'
+          class='btn btn-primary mt-2'
+          data-postto='{{post.id}}'
+        >Submit Comment</button>
       </div>
     </div>
     <div id='comment-body'>
+      {{#each post.Comments}}
+        <hr />
+        <div class='comment-box mt-3 bg-light container p-3'>
+          <p class='text-muted mb-2'>
+            Comment by
+            {{this.User.name}}
+            at
+            {{this.createdAt}}</p>
+          <p>{{this.content}}</p>
+        </div>
 
+      {{/each}}
     </div>
   </div>
 </div>

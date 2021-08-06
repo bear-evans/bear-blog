@@ -23,9 +23,8 @@ CREATE TABLE posts (
 CREATE TABLE comments (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     author_id INTEGER NOT NULL REFERENCES users(id),
-    title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
-    on_post INTEGER NOT NULL REFERENCES posts(id)
+    on_post INTEGER NOT NULL REFERENCES posts(id),
     createdAt DATE NOT NULL,
-    updatedAt DATE NOT NULL,
+    updatedAt DATE NOT NULL
 );
