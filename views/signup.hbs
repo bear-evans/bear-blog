@@ -1,65 +1,69 @@
-<script src="/js/signup.js"></script>
-<div class="container mt-5">
+<script src='/js/signup.js'></script>
+<div class='container mt-5'>
   {{#if error}}
-    <div class="alert alert-danger hidden" role="alert">
+    <div class='alert alert-danger hidden' role='alert'>
       <p>Error: {{error}}</p>
       <p>If you don't have an account, you can create one.</p>
     </div>
   {{/if}}
-  <div class="mx-auto text-center mb-5">
+  <div class='mx-auto text-center mb-5'>
     <h1>Create Account</h1>
     <p>Create an account to start sharing your thoughts on Bearpress.</p>
   </div>
-  <div class="input-group input-group-sm d-flex flex-column w-50 mx-auto">
-    <div class="form-floating mb-3">
+  <div class='input-group input-group-sm d-flex flex-column w-50 mx-auto'>
+    <div id='error-name' class='text-end'></div>
+    <div class='form-floating mb-3'>
       <input
-        id="name-signup"
-        type="text"
-        class="form-control w-100"
-        placeholder="Name"
-        aria-label="name"
+        id='name-signup'
+        type='text'
+        class='form-control w-100'
+        placeholder='Name'
+        aria-label='name'
       />
-      <label for="name-signup" class="form-label">Name</label>
+      <label for='name-signup' class='form-label'>Name</label>
 
     </div>
 
-    <div class="form-floating mb-3">
+    <div class='form-floating mb-3'>
+      <div id='error-email' class='text-end'></div>
       <input
-        id="email-signup"
-        type="email"
-        class="form-control w-100"
-        placeholder="Email"
-        aria-label="email"
+        id='email-signup'
+        type='email'
+        class='form-control w-100'
+        placeholder='Email'
+        aria-label='email'
       />
-      <label for="email-signup" class="form-label">Email</label>
+      <label for='email-signup' class='form-label'>Email</label>
     </div>
 
-    <div class="form-floating mb-3">
+    <div class='form-floating mb-3'>
+      <div id='error-pass' class='text-end'></div>
       <input
-        id="password-signup"
-        type="password"
-        class="form-control w-100"
-        placeholder="Password"
-        aria-label="password"
+        id='password-signup'
+        type='password'
+        class='form-control w-100'
+        placeholder='Password'
+        aria-label='password'
       />
-      <label for="password-signup" class="form-label">Password</label>
+      <label for='password-signup' class='form-label'>Password</label>
     </div>
 
-    <div class="form-floating mb-3">
+    <div class='form-floating mb-3'>
+      <div id='error-check' class='text-end'></div>
       <input
-        id="password-check-signup"
-        type="password"
-        class="form-control w-100"
-        placeholder="Re-enter Password"
-        aria-label="password check"
+        id='password-check-signup'
+        type='password'
+        class='form-control w-100'
+        placeholder='Re-enter Password'
+        aria-label='password check'
       />
-      <label for="password-check-signup" class="form-label">Re-Enter Password</label>
+      <label for='password-check-signup' class='form-label'>Re-Enter Password</label>
     </div>
 
     <button
-      id="signup-button"
-      type="submit"
-      class="btn btn-primary mt-3 mx-auto w-25"
+      id='signup-button'
+      type='submit'
+      class='btn btn-primary mt-3 mx-auto w-25'
     >Sign Up</button>
   </div>
 </div>
