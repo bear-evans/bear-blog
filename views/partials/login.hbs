@@ -1,40 +1,40 @@
-<script src="/js/login.js"></script>
+<script src='/js/login.js'></script>
 {{#if loggedIn}}
-  <div id="greeting">Hello,
+  <div id='greeting' class='text-light'>Hello,
     {{name}}!
     <button
-      type="submit"
-      id="logout-button"
-      class="btn btn-secondary ms-2"
+      type='submit'
+      id='logout-button'
+      class='btn btn-secondary ms-2'
     >Logout</button>
   </div>
 {{else}}
-  <div id="header-login" class="input-group input-group-sm login-form">
+  <div id='header-login' class='input-group input-group-sm login-form'>
     <input
-      id="email-login"
-      type="email"
-      class="form-control me-2"
-      placeholder="Email"
-      aria-label="Email"
+      id='email-login'
+      type='email'
+      class='form-control me-2'
+      placeholder='Email'
+      aria-label='Email'
     />
 
     <input
-      id="password-login"
-      type="password"
-      class="form-control mx-2"
-      placeholder="Password"
-      aria-label="password"
+      id='password-login'
+      type='password'
+      class='form-control mx-2'
+      placeholder='Password'
+      aria-label='password'
     />
     <button
-      id="login-button"
-      type="submit"
-      class="btn btn-primary ms-2"
+      id='login-button'
+      type='submit'
+      class='btn btn-primary ms-2'
     >Login</button>
-    <a href="/signup">
+    <a href='/signup'>
       <button
-        id="create-account-button"
-        type="submit"
-        class="btn btn-secondary ms-2"
+        id='create-account-button'
+        type='submit'
+        class='btn btn-secondary ms-2'
       >Signup</button></a>
   </div>
 {{/if}}

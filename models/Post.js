@@ -4,8 +4,8 @@
 // represents a single blog post and all
 // associated data
 // =============================================
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class Post extends Model {}
 
@@ -21,8 +21,8 @@ Post.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "user",
-        key: "id",
+        model: 'User',
+        key: 'id',
       },
     },
     title: {

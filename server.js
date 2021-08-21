@@ -25,13 +25,10 @@ const bearStore = new SequelizeStore({ db: sequelize });
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    maxAge: 1200,
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
+    maxAge: 15 * 60 * 1000,
   },
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: bearStore,
 };
 
